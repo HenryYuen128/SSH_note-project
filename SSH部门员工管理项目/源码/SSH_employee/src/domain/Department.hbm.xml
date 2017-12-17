@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+   
+    <class name="domain.Department" table="t_Department" lazy="false">
+    
+    <id name="did" column="DeptId">
+    <!-- 设置数据库表Id增长策略，native：生成表id值就是主键自动增长 -->
+    <generator class="native"></generator>
+    </id>
+    <property name="dname" column="Name"></property>
+    <property name="ddesc" column="DDesc"></property>
+    
+    <set name="employees" cascade="delete" inverse="true">
+    <key column="DeptId"></key>
+    <one-to-many class="domain.Employee"/>
+    </set>
+    
+    
+    </class>
+    </hibernate-mapping>

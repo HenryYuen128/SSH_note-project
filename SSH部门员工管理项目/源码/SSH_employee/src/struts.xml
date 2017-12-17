@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="ssh_employee" extends="struts-default" namespace="/">
+	<interceptors>
+    		<interceptor name="loginIntercetor" class="interceptor.LoginIntercetor"></interceptor>
+    		<!-- 自定义拦截器栈 -->
+    		<interceptor-stack name="myStack">
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    			<interceptor-ref name="loginIntercetor">
+    				<param name="excludeMethods">login</param>
+    			</interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    <action name="employ_*"  class="employAction" method="{1}">
+    
+    <interceptor-ref name="myStack"></interceptor-ref>
+   <result name="error">/index.jsp</result>
+    <result name="input">/index.jsp</result>
+    <result name="success" type="redirect">/frame.jsp</result>
+     <result name="findAll">/jsp/employee/listEmp.jsp</result>
+     <result name="saveUI">/jsp/employee/addEmp.jsp</result>
+     <result name="saveSuccess" type="redirectAction">employ_findAll.action</result>
+     <result name="editSuccess">/jsp/employee/editEmp.jsp</result>
+     <result name="updateSuccess" type="redirectAction">employ_findAll.action</result>
+     <result name="deleteSuccess" type="redirectAction">employ_findAll.action</result>
+    </action>
+    
+    <action name="department_*" class="departmentAction"  method="{1}">
+    <interceptor-ref name="myStack"></interceptor-ref>
+     <result name="error">/index.jsp</result>
+ 	 <result name="findAll">/jsp/department/listDep.jsp</result>
+ 	 <result name="saveUI">/jsp/department/addDepartment.jsp</result>
+ 	 <result name="saveSuccess" type="redirectAction">department_findAll.action</result>
+ 	 <result name="editSuccess">/jsp/department/editDepartment.jsp</result>
+ 	 <result name="updateSuccess" type="redirectAction">department_findAll.action</result>
+ 	 <result name="deleteSuccess" type="redirectAction">department_findAll.action</result>
+  	</action>
+  	
+
+  	
+	</package>
+
+
+
+</struts>

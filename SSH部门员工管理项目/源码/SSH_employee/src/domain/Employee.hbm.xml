@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+   
+    <class name="domain.Employee" table="t_employee">
+  
+      
+    <id name="eid" column="Eid">
+    <!-- 设置数据库表Id增长策略，native：生成表id值就是主键自动增长 -->
+    <generator class="native"></generator>
+    </id>
+    <property name="ename" column="Name"></property>
+     <property name="eno" column="ENo"></property>
+    <property name="egender" column="Gender"></property>
+     <property name="ebirthday" column="Birthday"></property>
+    <property name="ehiredday" column="DayOfHired"></property>
+    <property name="eusername" column="Username"></property>
+    <property name="epassword" column="Password"></property>
+  
+    
+    <many-to-one name="department" class="domain.Department" column="DeptId"></many-to-one>
+    
+    </class>
+    </hibernate-mapping>
